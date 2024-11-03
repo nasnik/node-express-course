@@ -6,3 +6,4 @@ const positiveTransactionsNumber = () => {
 }
 
 positiveTransactionsNumber();
+module.exports = positiveTransactionsNumber;
