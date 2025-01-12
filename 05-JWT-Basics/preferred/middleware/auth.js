@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken');
 const { Unauthenticated } = require('../errors');
 
-const authenticationMiddleware = (req, res, next) => {
+const authenticationMiddleware = async (req, res, next) => {
     const authHeader = req.headers.authorization;
 
     if (!authHeader || !authHeader.startsWith('Bearer ')) {
@@ -10,15 +10,20 @@ const authenticationMiddleware = (req, res, next) => {
 
     const token = authHeader.split(' ')[1];
 
-    jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
-        if (err) {
-            return next(new Unauthenticated('Not authorized to access this route'));
-        }
+    try {
+         const decoded = await new Promise((resolve, reject) => {
+            jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
+                if (err) reject(err);
+                resolve(decoded);
+            });
+        });
 
         const { id, username } = decoded;
         req.user = { id, username };
         next();
-    });
+    } catch (err) {
+        return next(new Unauthenticated('Not authorized to access this route'));
+    }
 };
 
 module.exports = authenticationMiddleware;
