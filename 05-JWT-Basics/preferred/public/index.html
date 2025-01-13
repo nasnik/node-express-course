@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ticket Reservation</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+<h1>Workshop Ticket Reservation</h1>
+
+
+<form class="form">
+  <h3>Log In</h3>
+  <label for="username">Username</label>
+  <input type="text" class="username-input" required />
+  <label for="password">Password</label>
+  <input type="password" class="password-input" required />
+  <button type="submit">Log In</button>
+  <div class="form-alert"></div>
+</form>
+
+
+<button id="data">Access Protected Information</button>
+<div class="result"></div>
+
+
+<form class="order-form">
+  <h3>Order Tickets</h3>
+  <label for="name">Name</label>
+  <input type="text" class="name-input" required />
+  <label for="email">Email</label>
+  <input type="email" class="email-input" required />
+  <label for="quantity">Quantity</label>
+  <input type="number" class="quantity-input" min="1" required />
+  <button type="submit">Submit</button>
+  <div class="order-alert"></div>
+</form>
+
+
+<div>
+  <p class="token">No user authenticated</p>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="/browser-app.js"></script>
+</body>
+</html>
